@@ -45,7 +45,7 @@ export class SvgFigureComponent implements OnInit {
 
 
   onMouseDown(event: MouseEvent) {
-    event.preventDefault(); // Prevent default action for smoother dragging
+    event.preventDefault(); 
     const boundingRect = this.rectangle.nativeElement.getBoundingClientRect();
     const offsetX = event.clientX - boundingRect.left;
     const offsetY = event.clientY - boundingRect.top;
@@ -54,7 +54,7 @@ export class SvgFigureComponent implements OnInit {
       this.isResizing = true;
       this.startX = event.clientX;
       this.startY = event.clientY;
-      this.setCursor('col-resize'); // Set cursor style to col-resize
+      this.setCursor('col-resize');
     } else {
       this.stopResizing();
     }
@@ -92,7 +92,7 @@ export class SvgFigureComponent implements OnInit {
 
   stopResizing() {
     this.isResizing = false;
-    this.setCursor('auto'); // Reset cursor style to default
+    this.setCursor('auto');
   }
 
   addMouseUpListener() {
