@@ -6,12 +6,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./perimeter-display.component.css']
 })
 export class PerimeterDisplayComponent implements OnInit {
-  @Input() perimeter: number = 0;
-
-  constructor() { }
+  
+  @Input() width : any;
+  @Input() height : any;
 
   ngOnInit(): void {
-    debugger
+    
   }
 
 }

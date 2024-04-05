@@ -1,12 +1,15 @@
-<div class="svg-figure-container" 
-     (mousedown)="onMouseDown($event)"
-     (mousemove)="onMouseMove($event)"
-     (mouseup)="onMouseUp($event)">
-  <svg [attr.width]="width" [attr.height]="height">
-    <rect #rectangle 
-          [attr.width]="width" 
-          [attr.height]="height" 
-          fill="none" 
-          stroke="black"></rect>
-  </svg>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+      <svg class="svg-figure-container" 
+      (mousedown)="onMouseDown($event)"
+      (mousemove)="onMouseMove($event)"
+      (mouseup)="onMouseUp($event)" 
+      [attr.width]="width" 
+      [attr.height]="height">
+      <rect #rectangle 
+            [attr.width]="width" 
+            [attr.height]="height" 
+            fill="yellowgreen" 
+            stroke="black"></rect>
+      </svg>
 </div>

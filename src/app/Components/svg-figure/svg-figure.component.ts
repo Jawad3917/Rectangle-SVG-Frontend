@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -9,9 +9,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SvgFigureComponent implements OnInit {
   @ViewChild('rectangle') rectangle!: ElementRef<SVGRectElement>;
+  @Output() dimensionsChange: EventEmitter<{ width: number, height: number }> = new EventEmitter();
 
-  width: number = 500;
-  height: number = 250;
+  @Input() widthFromParent : any;
+  @Input() heightFromParent : any;
+
+  width: number = 100;
+  height: number = 150;
   perimeter: number = 0;
   startX: number = 0;
   startY: number = 0;
@@ -20,6 +24,8 @@ export class SvgFigureComponent implements OnInit {
   constructor(private http: HttpClient, private renderer: Renderer2) { }
 
   ngOnInit(): void {
+    this.width = this.widthFromParent;
+    this.height = this.heightFromParent;
     this.loadInitialDimensions();
     this.addMouseUpListener(); // Add listener for mouseup event on document body
   }
@@ -34,7 +40,9 @@ export class SvgFigureComponent implements OnInit {
 
   calculatePerimeter() {
     this.perimeter = 2 * (this.width + this.height);
+    this.emitDimensions();
   }
+
 
   onMouseDown(event: MouseEvent) {
     event.preventDefault(); // Prevent default action for smoother dragging
@@ -91,5 +99,9 @@ export class SvgFigureComponent implements OnInit {
     this.renderer.listen('document', 'mouseup', () => {
       this.stopResizing();
     });
+  }
+
+  emitDimensions() {
+    this.dimensionsChange.emit({ width: this.width, height: this.height });
   }
 }

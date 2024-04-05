@@ -1,5 +1,17 @@
-<div>
-  <h1>SVG Figure Drawing</h1>
-  <app-svg-figure></app-svg-figure>
-  <app-perimeter-display></app-perimeter-display>
+<div *ngIf="renderingView">
+  <div fxLayout="row" fxLayoutAlign="center center" >
+    <h1>SVG Figure Drawing Application</h1>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" >
+    <div fxLayoutAlign="center center">
+        <app-perimeter-display [width]="width" [height]="height"></app-perimeter-display>
+    </div>
+    <div class="h-64">
+        <button [disabled]="this.buttonClicked" (click)="saveParametersOnJsonFile(height,width)" class = "button-class">Save parameters</button>
+    </div>
+  </div>
+
+  <app-svg-figure (dimensionsChange)="onDimensionsChange($event)" [widthFromParent]="width" [heightFromParent]="height"></app-svg-figure>
+  
 </div>
